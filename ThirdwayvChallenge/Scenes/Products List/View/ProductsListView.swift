@@ -12,6 +12,12 @@ class ProductsListView: UIViewController {
     // MARK: - OutLets
     
     @IBOutlet private weak var productsListCollection: UICollectionView!
+    
+    //MARK: Properties
+    
+    private let presenter =  ProductsListPresenter(serviceManager: ProductsListService())
+    
+    private var products: [ProductsListModel]?
 
     // MARK: - View Life Cycle
     
@@ -21,6 +27,12 @@ class ProductsListView: UIViewController {
         title = "Products List"
         
         setupProductsListCollection()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.setViewDelegate(delegate: self)
+        presenter.fetchProducts()
     }
     
     // MARK: - Methods
@@ -36,10 +48,26 @@ class ProductsListView: UIViewController {
     }
     
     private func reloadProductsListCollection() {
-        
-        productsListCollection.reloadData()
+        DispatchQueue.main.async {
+            self.productsListCollection.reloadData()
+        }
     }
 
+}
+
+// MARK: - Presenter Delegate
+
+extension ProductsListView: ProductsListPresenterViewDelegate {
+    
+    func showProducts(products: [ProductsListModel]) {
+        self.products = products
+        print("sucsess\(products.count)")
+        reloadProductsListCollection()
+    }
+    
+    func showError(msg: String) {
+        //
+    }
 }
 
 // MARK: - Collection Delegate

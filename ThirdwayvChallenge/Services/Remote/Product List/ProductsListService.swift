@@ -8,10 +8,10 @@
 import Foundation
 
 public protocol ProductsListProtocol {
-    func getRecipes(completion: @escaping (Result<[ProductsListModel], NetworkError>) -> Void)
+    func getProducts(completion: @escaping (Result<[ProductsListModel], NetworkError>) -> Void)
 }
 
-class RecipesService: ProductsListProtocol {
+class ProductsListService: ProductsListProtocol {
     
     // MARK: - Properties
     
@@ -23,7 +23,7 @@ class RecipesService: ProductsListProtocol {
         self.networkServices = networkServices
     }
     
-    func getRecipes(completion: @escaping (Result<[ProductsListModel], NetworkError>) -> Void){
+    func getProducts(completion: @escaping (Result<[ProductsListModel], NetworkError>) -> Void){
         let endPoint = ProductsListEndPoint.getProducts
         let request = endPoint.createRequest()
         networkServices.request(request, completion: completion)

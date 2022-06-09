@@ -42,7 +42,9 @@ public class NetworkService: NetworkServiceProtocol {
             return
         }
         
-        let task = URLSession().dataTask(with: request.buildURLRequest(with: url)) { data, _, error in
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: request.buildURLRequest(with: url)) { data, _, error in
             guard let data = data else {
                 if let error = error {
                     completion(.failure(NetworkError.unknown(code: 0, error: error.localizedDescription)))

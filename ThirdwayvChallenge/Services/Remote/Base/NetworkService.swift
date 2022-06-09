@@ -12,11 +12,12 @@ import Combine
 public protocol NetworkServiceProtocol {
     
     var requestTimeOut: Float { get }
-    func request<T>(_ request: NetworkRequest,
-                         completion: @escaping (Result<T, NetworkError>) -> Void)
+    func request<T: Codable>(_ request: NetworkRequest,
+                    completion: @escaping (Result<T, NetworkError>) -> Void)
 }
 
-public class NetworkService {
+public class NetworkService: NetworkServiceProtocol {
+    
     
     // MARK: - Properties
     
@@ -30,9 +31,8 @@ public class NetworkService {
     
     // MARK: - Methods
     
-    public func request<T>(_ request: NetworkRequest,
-                           completion: @escaping (Result<T, NetworkError>) -> Void)
-    where T: Decodable, T: Encodable {
+    public func request<T: Codable>(_ request: NetworkRequest,
+                           completion: @escaping (Result<T, NetworkError>) -> Void) {
         let sessionConfig = URLSessionConfiguration.default
         sessionConfig.timeoutIntervalForRequest = TimeInterval(
             request.requestTimeOut ?? requestTimeOut)

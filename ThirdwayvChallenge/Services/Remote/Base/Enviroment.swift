@@ -8,5 +8,5 @@
 import Foundation
 
 enum Enviroment {
-    static let baseURL =  "https://api.npoint.io/43427003d33f1f6b51cc"
+    static let baseURL =  "http://myjson.dit.upm.es/api/bins/9abl"
 }

@@ -14,6 +14,7 @@ class ProductDetailsView: UIViewController {
     @IBOutlet private weak var productImage: UIImageView!
     @IBOutlet private weak var productPrice: UILabel!
     @IBOutlet private weak var productDescription: UILabel!
+    @IBOutlet private weak var imageHeight: NSLayoutConstraint!
     
     // MARK: - Properties
     
@@ -23,12 +24,10 @@ class ProductDetailsView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        guard let productDetailsViewModel = productDetailsViewModel else {
-            return
+        productDescription.frame.origin.y = 0.0
+        if let productDetailsViewModel = productDetailsViewModel {
+            setData(with: productDetailsViewModel)
         }
-        setData(with: productDetailsViewModel)
     }
     
     // MARK: - Methods
@@ -40,8 +39,10 @@ class ProductDetailsView: UIViewController {
     
     private func setData(with viewModel: ProductCellViewModel) {
         
+        imageHeight.constant = CGFloat(viewModel.imageHeight)
         productImage.downloaded(from: viewModel.image)
         productPrice.text = "\(viewModel.price)$"
         productDescription.text = viewModel.description
+        view.layoutIfNeeded()
     }
 }

@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		1D343B5C285348E700414C81 /* ProductDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D343B5A285348E700414C81 /* ProductDetailsView.swift */; };
 		1D343B5D285348E700414C81 /* ProductDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D343B5B285348E700414C81 /* ProductDetailsView.xib */; };
-		1D343B5F28534E2D00414C81 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D343B5E28534E2D00414C81 /* UIViewController+Extensions.swift */; };
+		1D343B5F28534E2D00414C81 /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D343B5E28534E2D00414C81 /* UIViewController+Navigation.swift */; };
+		1D343B6128539C0A00414C81 /* CustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D343B6028539C0A00414C81 /* CustomFlowLayout.swift */; };
 		1D544C772850F48C008249BA /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D544C762850F48C008249BA /* Base.swift */; };
 		1D544C792850F4C5008249BA /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D544C782850F4C5008249BA /* NetworkRequest.swift */; };
 		1D544C7B2850F5A3008249BA /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D544C7A2850F5A3008249BA /* Enviroment.swift */; };
@@ -34,7 +35,8 @@
 /* Begin PBXFileReference section */
 		1D343B5A285348E700414C81 /* ProductDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsView.swift; sourceTree = "<group>"; };
 		1D343B5B285348E700414C81 /* ProductDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailsView.xib; sourceTree = "<group>"; };
-		1D343B5E28534E2D00414C81 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		1D343B5E28534E2D00414C81 /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
+		1D343B6028539C0A00414C81 /* CustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFlowLayout.swift; sourceTree = "<group>"; };
 		1D544C762850F48C008249BA /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		1D544C782850F4C5008249BA /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		1D544C7A2850F5A3008249BA /* Enviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
@@ -72,7 +74,6 @@
 		1D343B552853482C00414C81 /* Product Details */ = {
 			isa = PBXGroup;
 			children = (
-				1D343B572853486A00414C81 /* Presenter */,
 				1D343B562853486400414C81 /* View */,
 			);
 			path = "Product Details";
@@ -85,13 +86,6 @@
 				1D343B5B285348E700414C81 /* ProductDetailsView.xib */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		1D343B572853486A00414C81 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		1D544C732850F43C008249BA /* Services */ = {
@@ -218,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				1DEE458D284FF6A10041A074 /* Product Cell */,
+				1D343B6028539C0A00414C81 /* CustomFlowLayout.swift */,
 			);
 			path = "Custom UI";
 			sourceTree = "<group>";
@@ -238,7 +233,7 @@
 				1DEE458F284FF8EF0041A074 /* UIView+Extensions.swift */,
 				1DEE45912850024F0041A074 /* UICollectionView+Extensions.swift */,
 				1DC2D78A28526C5F00374E14 /* UIImageView+Extensions.swift */,
-				1D343B5E28534E2D00414C81 /* UIViewController+Extensions.swift */,
+				1D343B5E28534E2D00414C81 /* UIViewController+Navigation.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -321,7 +316,7 @@
 				1D544C7B2850F5A3008249BA /* Enviroment.swift in Sources */,
 				1DEE458B284FF3850041A074 /* ProductCell.swift in Sources */,
 				1DC2D78D2852702000374E14 /* ProductCellViewModel.swift in Sources */,
-				1D343B5F28534E2D00414C81 /* UIViewController+Extensions.swift in Sources */,
+				1D343B5F28534E2D00414C81 /* UIViewController+Navigation.swift in Sources */,
 				1D343B5C285348E700414C81 /* ProductDetailsView.swift in Sources */,
 				1DC2D782285250B900374E14 /* ProductListEndPoint.swift in Sources */,
 				1DC2D7842852518E00374E14 /* ProductsListModel.swift in Sources */,
@@ -332,6 +327,7 @@
 				1DC2D7892852564000374E14 /* ProductsListPresenter.swift in Sources */,
 				1DC2D7862852522F00374E14 /* ProductsListService.swift in Sources */,
 				1DEE4590284FF8EF0041A074 /* UIView+Extensions.swift in Sources */,
+				1D343B6128539C0A00414C81 /* CustomFlowLayout.swift in Sources */,
 				1DEE4586284FEE710041A074 /* ProductsListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

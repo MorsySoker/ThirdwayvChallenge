@@ -14,7 +14,7 @@ typealias ProductsListDelegate = ProductsListPresenterViewDelegate & UIViewContr
 
 protocol ProductsListPresenterViewDelegate: AnyObject {
     
-    func showProducts(products: [ProductsListModel])
+    func showProducts()
     func showError(msg: String)
 }
 
@@ -22,8 +22,10 @@ final class ProductsListPresenter {
     
     // MARK: - Properties
     
-    var serviceManager: ProductsListServiceProtocol?
-    weak var delegate: ProductsListDelegate?
+    private var productsList: [ProductsListModel]?
+    private var serviceManager: ProductsListServiceProtocol?
+    private weak var delegate: ProductsListDelegate?
+    private var isPaginating: Bool = false
     
     // MARK: - init
     
@@ -31,25 +33,61 @@ final class ProductsListPresenter {
         self.serviceManager = serviceManager
     }
     
-    //MARK: - Set View Delegate
+    //MARK: - Methods
     
+    //Set View Delegate
     func setViewDelegate(delegate: ProductsListDelegate) {
         self.delegate = delegate
     }
+    
+    func getProductsCount() -> Int {
+        guard let productsList = productsList else {
+            return 0
+        }
+        return productsList.count
+    }
+    
+    func getProductAtIndexPath(indexPath: Int) -> ProductCellViewModel? {
+        guard let productsList = productsList else {
+            return nil
+        }
+        return productsList[indexPath].toProductCellViewModel()
+    }
+    
+    func getIsPaginating() -> Bool {
+        
+        isPaginating
+    }
 
+    private func appendProduct(products: [ProductsListModel]) {
+        
+        products.forEach { productsList?.append($0) }
+    }
     // MARK: - Methods
     
-    func fetchProducts() {
-        
+    func fetchProducts(paginating: Bool) {
+        if paginating {
+            isPaginating = true
+        }
         serviceManager?.getProducts { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let products):
-                self.delegate?.showProducts(products: products)
+                if paginating {
+                    self.appendProduct(products: products)
+                    self.isPaginating = false
+                } else {
+                    self.productsList = products
+                }
+                self.delegate?.showProducts()
             case .failure(let error):
                 self.delegate?.showError(msg: error.localizedDescription)
+                if paginating {
+                    self.isPaginating = false
+                }
             }
         }
+        
     }
 }

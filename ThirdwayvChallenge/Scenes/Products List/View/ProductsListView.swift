@@ -16,7 +16,6 @@ class ProductsListView: UIViewController {
     //MARK: Properties
     
     private var presenter: ProductsListPresenter?
-    
     private var products: [ProductsListModel]?
     
     // MARK: - init
@@ -35,12 +34,12 @@ class ProductsListView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         guard let presenter = presenter else {
             return
         }
         presenter.setViewDelegate(delegate: self)
-        presenter.fetchProducts()
+        presenter.fetchProducts(paginating: false)
     }
     
     override func viewDidLoad() {
@@ -50,19 +49,16 @@ class ProductsListView: UIViewController {
         
         setupProductsListCollection()
     }
-
     
     // MARK: - Methods
     
     private func setupProductsListCollection() {
         
-
         productsListCollection.collectionViewLayout = setcustomFlowLayout()
         productsListCollection.contentInsetAdjustmentBehavior = .always
-        productsListCollection.register(cellType: ProductCell.self)
-        
         productsListCollection.dataSource = self
         productsListCollection.delegate = self
+        productsListCollection.register(cellType: ProductCell.self)
         
         reloadProductsListCollection()
     }
@@ -90,9 +86,8 @@ class ProductsListView: UIViewController {
 
 extension ProductsListView: ProductsListPresenterViewDelegate {
     
-    func showProducts(products: [ProductsListModel]) {
+    func showProducts() {
         
-        self.products = products
         reloadProductsListCollection()
     }
     
@@ -106,15 +101,14 @@ extension ProductsListView: ProductsListPresenterViewDelegate {
 extension ProductsListView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
         let productDetailsVC = ProductDetailsView()
-        guard let products = products else {
-            print("Product Not Found")
+        
+        guard let presenter = presenter,
+              let product = presenter.getProductAtIndexPath(indexPath: indexPath.row) else {
             return
         }
-        
-        let product = products[indexPath.row]
-        productDetailsVC.configureView(with: product.toProductCellViewModel()!)
+        productDetailsVC.configureView(with: product)
         
         pushVC(viewController: productDetailsVC)
     }
@@ -124,11 +118,16 @@ extension ProductsListView: UICollectionViewDelegate {
 
 extension ProductsListView: UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        products?.count ?? 0
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        guard let presenter = presenter else {
+            return 0
+        }
+        return presenter.getProductsCount()
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let productCell = collectionView.dequeueReusableCell(
             withReuseIdentifier: ProductCell.identifier,
@@ -136,17 +135,11 @@ extension ProductsListView: UICollectionViewDataSource {
             fatalError("xib doesn't exist")
         }
         
-        guard let products = products else {
-            print("Products Not Found")
+        guard let presenter = presenter,
+              let product = presenter.getProductAtIndexPath(indexPath: indexPath.row) else {
             return productCell
         }
-        
-        let product = products[indexPath.row]
-        
-        if let productViewModel = product.toProductCellViewModel() {
-            
-            productCell.configureView(with: productViewModel)
-        }
+        productCell.configureView(with: product)
         
         return productCell
     }
@@ -161,7 +154,9 @@ extension ProductsListView: UIScrollViewDelegate {
         let position =  scrollView.contentOffset.y
         
         if position > (productsListCollection.contentSize.height - 100 - scrollView.frame.size.height) {
-            
+            guard let presetner = presenter,
+                  !presetner.getIsPaginating() else { return }
+            presetner.fetchProducts(paginating: true)
         }
     }
 }

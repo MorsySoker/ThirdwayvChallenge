@@ -20,9 +20,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="nG4-Ow-sXb">
-                    <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                    <rect key="frame" x="10" y="44" width="394" height="852"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dUR-ou-Lmi">
+                    <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dUR-ou-Lmi">
                         <size key="itemSize" width="128" height="128"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -33,9 +33,9 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="nG4-Ow-sXb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Yxv-Yo-h1T"/>
+                <constraint firstItem="nG4-Ow-sXb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="Yxv-Yo-h1T"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="nG4-Ow-sXb" secondAttribute="bottom" constant="-34" id="h9E-mE-2WL"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nG4-Ow-sXb" secondAttribute="trailing" id="jRF-UR-7qB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="nG4-Ow-sXb" secondAttribute="trailing" constant="10" id="jRF-UR-7qB"/>
                 <constraint firstItem="nG4-Ow-sXb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="jzb-hL-aFC"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

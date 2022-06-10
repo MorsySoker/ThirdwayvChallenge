@@ -15,6 +15,8 @@
 		1DC2D7842852518E00374E14 /* ProductsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC2D7832852518E00374E14 /* ProductsListModel.swift */; };
 		1DC2D7862852522F00374E14 /* ProductsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC2D7852852522F00374E14 /* ProductsListService.swift */; };
 		1DC2D7892852564000374E14 /* ProductsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC2D7882852564000374E14 /* ProductsListPresenter.swift */; };
+		1DC2D78B28526C5F00374E14 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC2D78A28526C5F00374E14 /* UIImageView+Extensions.swift */; };
+		1DC2D78D2852702000374E14 /* ProductCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC2D78C2852702000374E14 /* ProductCellViewModel.swift */; };
 		1DEE4567284FE88F0041A074 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE4566284FE88F0041A074 /* AppDelegate.swift */; };
 		1DEE4570284FE8920041A074 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DEE456F284FE8920041A074 /* Assets.xcassets */; };
 		1DEE4573284FE8920041A074 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DEE4571284FE8920041A074 /* LaunchScreen.storyboard */; };
@@ -35,6 +37,8 @@
 		1DC2D7832852518E00374E14 /* ProductsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListModel.swift; sourceTree = "<group>"; };
 		1DC2D7852852522F00374E14 /* ProductsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListService.swift; sourceTree = "<group>"; };
 		1DC2D7882852564000374E14 /* ProductsListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListPresenter.swift; sourceTree = "<group>"; };
+		1DC2D78A28526C5F00374E14 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
+		1DC2D78C2852702000374E14 /* ProductCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
 		1DEE4563284FE88F0041A074 /* ThirdwayvChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThirdwayvChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DEE4566284FE88F0041A074 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1DEE456F284FE8920041A074 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -191,6 +195,7 @@
 			children = (
 				1DEE4589284FF3850041A074 /* ProductCell.swift */,
 				1DEE458A284FF3850041A074 /* ProductCell.xib */,
+				1DC2D78C2852702000374E14 /* ProductCellViewModel.swift */,
 			);
 			path = "Product Cell";
 			sourceTree = "<group>";
@@ -200,6 +205,7 @@
 			children = (
 				1DEE458F284FF8EF0041A074 /* UIView+Extensions.swift */,
 				1DEE45912850024F0041A074 /* UICollectionView+Extensions.swift */,
+				1DC2D78A28526C5F00374E14 /* UIImageView+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -280,10 +286,12 @@
 				1D544C772850F48C008249BA /* Base.swift in Sources */,
 				1D544C7B2850F5A3008249BA /* Enviroment.swift in Sources */,
 				1DEE458B284FF3850041A074 /* ProductCell.swift in Sources */,
+				1DC2D78D2852702000374E14 /* ProductCellViewModel.swift in Sources */,
 				1DC2D782285250B900374E14 /* ProductListEndPoint.swift in Sources */,
 				1DC2D7842852518E00374E14 /* ProductsListModel.swift in Sources */,
 				1D544C7D2850F5BF008249BA /* NetworkService.swift in Sources */,
 				1DEE4567284FE88F0041A074 /* AppDelegate.swift in Sources */,
+				1DC2D78B28526C5F00374E14 /* UIImageView+Extensions.swift in Sources */,
 				1DEE45922850024F0041A074 /* UICollectionView+Extensions.swift in Sources */,
 				1DC2D7892852564000374E14 /* ProductsListPresenter.swift in Sources */,
 				1DC2D7862852522F00374E14 /* ProductsListService.swift in Sources */,

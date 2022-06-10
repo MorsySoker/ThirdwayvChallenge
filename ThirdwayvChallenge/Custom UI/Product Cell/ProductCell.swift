@@ -17,6 +17,18 @@ class ProductCell: UICollectionViewCell {
     
     @IBOutlet private weak var imageHeight: NSLayoutConstraint!
     
+    // MARK: - Properties
+    
+    private var productCellModel: ProductCellViewModel? {
+        didSet {
+            guard let productCellModel = productCellModel else {
+                print("Fail")
+                return
+            }
+            setData(with: productCellModel)
+        }
+    }
+    
     // MARK: - Cell Awake
     
     override func awakeFromNib() {
@@ -28,17 +40,31 @@ class ProductCell: UICollectionViewCell {
     
     // MARK: - Methods
     
-    func configureView(with height: CGFloat) {
+    func configureView(with viewModel: ProductCellViewModel) {
         
-        imageHeight.constant = height
-        self.layoutIfNeeded()
+        productCellModel = viewModel
     }
-
+    
     // MARK: - Private Methods
     
     private func setupView() {
-        
-        productImage.image = UIImage(named: "stockImage")
         setBorder()
+    }
+    
+    private func setData(with viewModel: ProductCellViewModel) {
+        productImage.downloaded(from: viewModel.image)
+        imageHeight.constant = CGFloat(viewModel.imageHeight)
+        productPrice.text = "\(viewModel.price)$"
+        productDescription.text = viewModel.description
+        self.layoutIfNeeded()
+    }
+    
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        let targetSize = CGSize(width: layoutAttributes.bounds.width, height: 0)
+        layoutAttributes.frame.size =
+        contentView.systemLayoutSizeFitting(targetSize,
+                                            withHorizontalFittingPriority: .required,
+                                            verticalFittingPriority: .fittingSizeLevel)
+        return layoutAttributes
     }
 }

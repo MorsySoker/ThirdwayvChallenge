@@ -24,44 +24,44 @@
                             <constraint firstAttribute="height" constant="128" id="ZWc-5e-AnH"/>
                         </constraints>
                     </imageView>
-                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TZf-0C-TvV">
-                        <rect key="frame" x="10" y="148" width="232" height="99"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="935$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoB-dg-QwL">
-                                <rect key="frame" x="0.0" y="0.0" width="232" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="rWY-2Y-Lqb"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" name="PriceColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 - Lorem ipsum boqxjhitlihdzpadydtazicjfqjoqg swjsdibmq" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Emy-Ve-wsr">
-                                <rect key="frame" x="0.0" y="20" width="232" height="79"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                    </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D88-DV-UbC">
+                        <rect key="frame" x="10" y="148" width="232" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="1Y7-da-xHT"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" name="PriceColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UTV-Lb-M95">
+                        <rect key="frame" x="10" y="179" width="232" height="68"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="Im0-OP-gVV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="1gm-bK-Psd"/>
                 <constraint firstItem="Im0-OP-gVV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="6wd-Hy-PGp"/>
-                <constraint firstAttribute="bottom" secondItem="TZf-0C-TvV" secondAttribute="bottom" constant="10" id="Uw5-KX-FEz"/>
-                <constraint firstItem="TZf-0C-TvV" firstAttribute="top" secondItem="Im0-OP-gVV" secondAttribute="bottom" constant="10" id="b34-cb-R51"/>
-                <constraint firstItem="TZf-0C-TvV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="cBF-Ks-v3g"/>
+                <constraint firstAttribute="trailing" secondItem="D88-DV-UbC" secondAttribute="trailing" constant="10" id="9T7-fM-3gj"/>
+                <constraint firstItem="D88-DV-UbC" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="Ir1-xe-7Xj"/>
+                <constraint firstItem="UTV-Lb-M95" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="Mll-RI-KgY"/>
+                <constraint firstItem="D88-DV-UbC" firstAttribute="top" secondItem="Im0-OP-gVV" secondAttribute="bottom" constant="10" id="Qmz-nf-zAG"/>
+                <constraint firstAttribute="bottom" secondItem="UTV-Lb-M95" secondAttribute="bottom" constant="10" id="iIz-Mx-pKJ"/>
                 <constraint firstAttribute="trailing" secondItem="Im0-OP-gVV" secondAttribute="trailing" constant="10" id="q2H-YH-Hpy"/>
-                <constraint firstAttribute="trailing" secondItem="TZf-0C-TvV" secondAttribute="trailing" constant="10" id="w4J-Az-MQH"/>
+                <constraint firstAttribute="trailing" secondItem="UTV-Lb-M95" secondAttribute="trailing" constant="10" id="s19-vm-Ufm"/>
+                <constraint firstItem="UTV-Lb-M95" firstAttribute="top" secondItem="D88-DV-UbC" secondAttribute="bottom" constant="10" id="xYN-KF-4TI"/>
             </constraints>
             <size key="customSize" width="252" height="257"/>
             <connections>
                 <outlet property="imageHeight" destination="ZWc-5e-AnH" id="ACs-4E-GAX"/>
+                <outlet property="productDescription" destination="UTV-Lb-M95" id="Gfc-Rb-tC5"/>
                 <outlet property="productImage" destination="Im0-OP-gVV" id="x8T-1y-2Bz"/>
+                <outlet property="productPrice" destination="D88-DV-UbC" id="fAc-y3-9Gd"/>
             </connections>
-            <point key="canvasLocation" x="-217" y="168"/>
+            <point key="canvasLocation" x="-217.39130434782609" y="167.74553571428569"/>
         </collectionViewCell>
     </objects>
     <resources>

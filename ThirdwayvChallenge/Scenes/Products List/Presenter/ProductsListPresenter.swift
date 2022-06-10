@@ -22,12 +22,12 @@ final class ProductsListPresenter {
     
     // MARK: - Properties
     
-    var serviceManager: ProductsListProtocol?
+    var serviceManager: ProductsListServiceProtocol?
     weak var delegate: ProductsListDelegate?
     
     // MARK: - init
     
-    init(serviceManager: ProductsListProtocol) {
+    init(serviceManager: ProductsListServiceProtocol) {
         self.serviceManager = serviceManager
     }
     
@@ -52,5 +52,4 @@ final class ProductsListPresenter {
             }
         }
     }
-    
 }

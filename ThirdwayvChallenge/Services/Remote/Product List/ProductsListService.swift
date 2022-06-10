@@ -7,11 +7,11 @@
 
 import Foundation
 
-public protocol ProductsListProtocol {
+public protocol ProductsListServiceProtocol {
     func getProducts(completion: @escaping (Result<[ProductsListModel], NetworkError>) -> Void)
 }
 
-class ProductsListService: ProductsListProtocol {
+class ProductsListService: ProductsListServiceProtocol {
     
     // MARK: - Properties
     

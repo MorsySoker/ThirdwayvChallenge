@@ -99,6 +99,16 @@ extension ProductsListView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("Hey \(indexPath.row)")
+        let productDetailsVC = ProductDetailsView()
+        guard let products = products else {
+            print("Product Not Found")
+            return
+        }
+        
+        let product = products[indexPath.row]
+        productDetailsVC.configureView(with: product.toProductCellViewModel()!)
+        
+        pushVC(viewController: productDetailsVC)
     }
 }
 

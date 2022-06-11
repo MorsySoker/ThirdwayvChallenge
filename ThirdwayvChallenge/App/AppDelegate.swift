@@ -14,9 +14,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
+        setMainInterface()
         reachable(with: "www.google.com")
         
-        let productsListVC = ProductsListView(service: ProductsListService())
+        return true
+    }
+    
+    private func setMainInterface() {
+        
+        let productsListVC =
+        ProductsListView(presenter: ProductsListPresenter(serviceManager: ProductsListService()))
         let navigation = UINavigationController(rootViewController: productsListVC)
 
         let frame = UIScreen.main.bounds
@@ -24,8 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window!.rootViewController = navigation
         window!.makeKeyAndVisible()
-        
-        return true
     }
     
     private func reachable(with hostName: String) {

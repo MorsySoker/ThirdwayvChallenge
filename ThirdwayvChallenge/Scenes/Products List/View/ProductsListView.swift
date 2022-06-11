@@ -12,6 +12,7 @@ final class ProductsListView: UIViewController {
     // MARK: - OutLets
     
     @IBOutlet private weak var productsListCollection: UICollectionView!
+    @IBOutlet private weak var noInternetConnectionImage: UIImageView!
     
     //MARK: - Properties
     
@@ -19,9 +20,9 @@ final class ProductsListView: UIViewController {
     
     // MARK: - init
     
-    init(service: ProductsListServiceProtocol) {
-        
-        self.presenter = ProductsListPresenter(serviceManager: service)
+    init(presenter: ProductsListPresenter) {
+
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -37,8 +38,8 @@ final class ProductsListView: UIViewController {
         guard let presenter = presenter else {
             return
         }
-        presenter.setViewDelegate(delegate: self)
-        presenter.fetchProducts(paginating: false)
+        presenter.delegate = self
+        presenter.getProducts()
     }
     
     override func viewDidLoad() {
@@ -46,7 +47,12 @@ final class ProductsListView: UIViewController {
         
         title = "Products List"
         
+        setReachabilityObserver()
         setupProductsListCollection()
+
+    }
+    
+    private func setReachabilityObserver() {
         NotificationCenter.default
             .addObserver(self,
                          selector: #selector(statusManager),
@@ -55,14 +61,18 @@ final class ProductsListView: UIViewController {
         updateUserInterface()
     }
     
-    func updateUserInterface() {
+    private func updateUserInterface() {
         switch Network.reachability.status {
         case .unreachable:
-            view.backgroundColor = .red
+//            productsListCollection.isHidden = true
+//            noInternetConnectionImage.isHidden = false
+            print("no internet")
         case .wwan:
-            view.backgroundColor = .yellow
+            productsListCollection.isHidden = false
+            noInternetConnectionImage.isHidden = true
         case .wifi:
-            view.backgroundColor = .green
+            productsListCollection.isHidden = false
+            noInternetConnectionImage.isHidden = true
         }
         print("Reachability Summary")
         print("Status:", Network.reachability.status)
@@ -71,7 +81,7 @@ final class ProductsListView: UIViewController {
         print("Wifi:", Network.reachability.isReachableViaWiFi)
     }
     
-    @objc func statusManager(_ notification: Notification) {
+    @objc private func statusManager(_ notification: Notification) {
         updateUserInterface()
     }
     
@@ -99,21 +109,16 @@ final class ProductsListView: UIViewController {
         
         return customFlowLayout
     }
-    
-    private func reloadProductsListCollection() {
-        DispatchQueue.main.async {
-            self.productsListCollection.reloadData()
-        }
-    }
 }
 
 // MARK: - Presenter Delegate
 
 extension ProductsListView: ProductsListPresenterViewDelegate {
     
-    func showProducts() {
-        
-        reloadProductsListCollection()
+    func reloadProductsListCollection() {
+        DispatchQueue.main.async {
+            self.productsListCollection.reloadData()
+        }
     }
     
     func showError(msg: String) {
@@ -179,9 +184,8 @@ extension ProductsListView: UIScrollViewDelegate {
         let position =  scrollView.contentOffset.y
         
         if position > (productsListCollection.contentSize.height - 100 - scrollView.frame.size.height) {
-            guard let presetner = presenter,
-                  !presetner.getIsPaginating() else { return }
-            presetner.fetchProducts(paginating: true)
+            guard let presetner = presenter else { return }
+            presetner.getMoreProducts()
         }
     }
 }

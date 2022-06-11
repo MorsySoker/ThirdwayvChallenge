@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductsListView: UIViewController {
+final class ProductsListView: UIViewController {
     
     // MARK: - OutLets
     
@@ -16,7 +16,6 @@ class ProductsListView: UIViewController {
     //MARK: Properties
     
     private var presenter: ProductsListPresenter?
-    private var products: [ProductsListModel]?
     
     // MARK: - init
     

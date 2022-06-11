@@ -23,6 +23,7 @@ final class ProductsListPresenter {
     // MARK: - Properties
     
     private var productsList: [ProductsListModel]?
+    private let cache = Cache<String, [ProductsListModel]>()
     private var serviceManager: ProductsListServiceProtocol?
     private weak var delegate: ProductsListDelegate?
     private var isPaginating: Bool = false
@@ -66,6 +67,12 @@ final class ProductsListPresenter {
     // MARK: - Methods
     
     func fetchProducts(paginating: Bool) {
+        
+        if let products = cache.value(forKey: "products"),
+           !paginating {
+            print("hey it's cached")
+            self.productsList = products
+        }
         if paginating {
             isPaginating = true
         }
@@ -79,6 +86,8 @@ final class ProductsListPresenter {
                     self.isPaginating = false
                 } else {
                     self.productsList = products
+                    self.cache.insert(products, forKey: "products")
+                        print("cached")
                 }
                 self.delegate?.showProducts()
             case .failure(let error):

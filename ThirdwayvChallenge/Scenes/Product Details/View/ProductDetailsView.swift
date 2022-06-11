@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductDetailsView: UIViewController {
+final class ProductDetailsView: UIViewController {
     
     // MARK: - Outlets
     

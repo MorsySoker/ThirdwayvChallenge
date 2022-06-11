@@ -16,6 +16,7 @@
 		1D544C792850F4C5008249BA /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D544C782850F4C5008249BA /* NetworkRequest.swift */; };
 		1D544C7B2850F5A3008249BA /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D544C7A2850F5A3008249BA /* Enviroment.swift */; };
 		1D544C7D2850F5BF008249BA /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D544C7C2850F5BF008249BA /* NetworkService.swift */; };
+		1D9893FC2854FE6000E69153 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D9893FB2854FE6000E69153 /* Reachability.swift */; };
 		1DC2D782285250B900374E14 /* ProductListEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC2D781285250B900374E14 /* ProductListEndPoint.swift */; };
 		1DC2D7842852518E00374E14 /* ProductsListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC2D7832852518E00374E14 /* ProductsListModel.swift */; };
 		1DC2D7862852522F00374E14 /* ProductsListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC2D7852852522F00374E14 /* ProductsListService.swift */; };
@@ -43,6 +44,7 @@
 		1D544C782850F4C5008249BA /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		1D544C7A2850F5A3008249BA /* Enviroment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
 		1D544C7C2850F5BF008249BA /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		1D9893FB2854FE6000E69153 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		1DC2D781285250B900374E14 /* ProductListEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListEndPoint.swift; sourceTree = "<group>"; };
 		1DC2D7832852518E00374E14 /* ProductsListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListModel.swift; sourceTree = "<group>"; };
 		1DC2D7852852522F00374E14 /* ProductsListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListService.swift; sourceTree = "<group>"; };
@@ -96,6 +98,14 @@
 				1D343B632853FFCD00414C81 /* Cache.swift */,
 			);
 			path = Local;
+			sourceTree = "<group>";
+		};
+		1D343B652854963800414C81 /* Network Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				1D9893FB2854FE6000E69153 /* Reachability.swift */,
+			);
+			path = "Network Reachability";
 			sourceTree = "<group>";
 		};
 		1D544C732850F43C008249BA /* Services */ = {
@@ -164,6 +174,7 @@
 		1DEE4565284FE88F0041A074 /* ThirdwayvChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				1D343B652854963800414C81 /* Network Reachability */,
 				1D544C732850F43C008249BA /* Services */,
 				1DEE458E284FF8B50041A074 /* Extensions */,
 				1DEE457B284FED950041A074 /* App */,
@@ -336,6 +347,7 @@
 				1D343B642853FFCE00414C81 /* Cache.swift in Sources */,
 				1DC2D78B28526C5F00374E14 /* UIImageView+Extensions.swift in Sources */,
 				1DEE45922850024F0041A074 /* UICollectionView+Extensions.swift in Sources */,
+				1D9893FC2854FE6000E69153 /* Reachability.swift in Sources */,
 				1DC2D7892852564000374E14 /* ProductsListPresenter.swift in Sources */,
 				1DC2D7862852522F00374E14 /* ProductsListService.swift in Sources */,
 				1DEE4590284FF8EF0041A074 /* UIView+Extensions.swift in Sources */,

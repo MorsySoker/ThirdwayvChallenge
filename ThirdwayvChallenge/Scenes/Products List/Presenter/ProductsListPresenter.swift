@@ -59,7 +59,7 @@ final class ProductsListPresenter {
         
         isPaginating
     }
-
+    
     private func appendProduct(products: [ProductsListModel]) {
         
         products.forEach { productsList?.append($0) }
@@ -73,6 +73,7 @@ final class ProductsListPresenter {
             print("hey it's cached")
             self.productsList = products
         }
+        
         if paginating {
             isPaginating = true
         }
@@ -87,7 +88,12 @@ final class ProductsListPresenter {
                 } else {
                     self.productsList = products
                     self.cache.insert(products, forKey: "products")
-                        print("cached")
+                    do {
+                        try self.cache.saveToDisk(withName: "products")
+                    }
+                    catch {
+                        print("Cache Failed")
+                    }
                 }
                 self.delegate?.showProducts()
             case .failure(let error):

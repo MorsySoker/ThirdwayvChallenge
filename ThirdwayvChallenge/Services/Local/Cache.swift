@@ -156,3 +156,19 @@ extension Cache: Codable where Key: Codable, Value: Codable {
         try container.encode(keyTracker.keys.compactMap(entry))
     }
 }
+
+extension Cache where Key: Codable, Value: Codable {
+    func saveToDisk(
+        withName name: String,
+        using fileManager: FileManager = .default
+    ) throws {
+        let folderURLs = fileManager.urls(
+            for: .cachesDirectory,
+            in: .userDomainMask
+        )
+
+        let fileURL = folderURLs[0].appendingPathComponent(name + ".cache")
+        let data = try JSONEncoder().encode(self)
+        try data.write(to: fileURL)
+    }
+}

@@ -18,16 +18,20 @@ final class ProductDetailsView: UIViewController {
     
     // MARK: - Properties
     
-    private var productDetailsViewModel: ProductCellViewModel? 
+    private var productDetailsViewModel: ProductCellViewModel?  {
+        didSet {
+            if let productDetailsViewModel = productDetailsViewModel {
+                self.loadViewIfNeeded()
+                setData(with: productDetailsViewModel)
+            }
+        }
+    }
 
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         productDescription.frame.origin.y = 0.0
-        if let productDetailsViewModel = productDetailsViewModel {
-            setData(with: productDetailsViewModel)
-        }
     }
     
     // MARK: - Methods

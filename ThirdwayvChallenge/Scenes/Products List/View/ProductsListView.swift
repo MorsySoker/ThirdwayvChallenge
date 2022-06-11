@@ -12,16 +12,17 @@ final class ProductsListView: UIViewController {
     // MARK: - OutLets
     
     @IBOutlet private weak var productsListCollection: UICollectionView!
+    @IBOutlet private weak var noInternetConnectionImage: UIImageView!
     
-    //MARK: Properties
+    //MARK: - Properties
     
     private var presenter: ProductsListPresenter?
     
     // MARK: - init
     
-    init(service: ProductsListServiceProtocol) {
-        
-        self.presenter = ProductsListPresenter(serviceManager: service)
+    init(presenter: ProductsListPresenter) {
+
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -37,8 +38,8 @@ final class ProductsListView: UIViewController {
         guard let presenter = presenter else {
             return
         }
-        presenter.setViewDelegate(delegate: self)
-        presenter.fetchProducts(paginating: false)
+        presenter.delegate = self
+        presenter.getProducts()
     }
     
     override func viewDidLoad() {
@@ -46,7 +47,42 @@ final class ProductsListView: UIViewController {
         
         title = "Products List"
         
+        setReachabilityObserver()
         setupProductsListCollection()
+
+    }
+    
+    private func setReachabilityObserver() {
+        NotificationCenter.default
+            .addObserver(self,
+                         selector: #selector(statusManager),
+                         name: .flagsChanged,
+                         object: nil)
+        updateUserInterface()
+    }
+    
+    private func updateUserInterface() {
+        switch Network.reachability.status {
+        case .unreachable:
+//            productsListCollection.isHidden = true
+//            noInternetConnectionImage.isHidden = false
+            print("no internet")
+        case .wwan:
+            productsListCollection.isHidden = false
+            noInternetConnectionImage.isHidden = true
+        case .wifi:
+            productsListCollection.isHidden = false
+            noInternetConnectionImage.isHidden = true
+        }
+        print("Reachability Summary")
+        print("Status:", Network.reachability.status)
+        print("HostName:", Network.reachability.hostname ?? "nil")
+        print("Reachable:", Network.reachability.isReachable)
+        print("Wifi:", Network.reachability.isReachableViaWiFi)
+    }
+    
+    @objc private func statusManager(_ notification: Notification) {
+        updateUserInterface()
     }
     
     // MARK: - Methods
@@ -73,21 +109,16 @@ final class ProductsListView: UIViewController {
         
         return customFlowLayout
     }
-    
-    private func reloadProductsListCollection() {
-        DispatchQueue.main.async {
-            self.productsListCollection.reloadData()
-        }
-    }
 }
 
 // MARK: - Presenter Delegate
 
 extension ProductsListView: ProductsListPresenterViewDelegate {
     
-    func showProducts() {
-        
-        reloadProductsListCollection()
+    func reloadProductsListCollection() {
+        DispatchQueue.main.async {
+            self.productsListCollection.reloadData()
+        }
     }
     
     func showError(msg: String) {
@@ -153,9 +184,8 @@ extension ProductsListView: UIScrollViewDelegate {
         let position =  scrollView.contentOffset.y
         
         if position > (productsListCollection.contentSize.height - 100 - scrollView.frame.size.height) {
-            guard let presetner = presenter,
-                  !presetner.getIsPaginating() else { return }
-            presetner.fetchProducts(paginating: true)
+            guard let presetner = presenter else { return }
+            presetner.getMoreProducts()
         }
     }
 }

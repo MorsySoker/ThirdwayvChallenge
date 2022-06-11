@@ -14,7 +14,7 @@ typealias ProductsListDelegate = ProductsListPresenterViewDelegate & UIViewContr
 
 protocol ProductsListPresenterViewDelegate: AnyObject {
     
-    func showProducts()
+    func reloadProductsListCollection()
     func showError(msg: String)
 }
 
@@ -25,8 +25,8 @@ final class ProductsListPresenter {
     private var productsList: [ProductsListModel]?
     private let cache = Cache<String, [ProductsListModel]>()
     private var serviceManager: ProductsListServiceProtocol?
-    private weak var delegate: ProductsListDelegate?
-    private var isPaginating: Bool = false
+    private var isFetching: Bool = false
+    weak var delegate: ProductsListDelegate?
     
     // MARK: - init
     
@@ -35,11 +35,6 @@ final class ProductsListPresenter {
     }
     
     //MARK: - Methods
-    
-    //Set View Delegate
-    func setViewDelegate(delegate: ProductsListDelegate) {
-        self.delegate = delegate
-    }
     
     func getProductsCount() -> Int {
         guard let productsList = productsList else {
@@ -54,49 +49,55 @@ final class ProductsListPresenter {
         }
         return productsList[indexPath].toProductCellViewModel()
     }
-    
-    func getIsPaginating() -> Bool {
-        
-        isPaginating
-    }
 
-    private func appendProduct(products: [ProductsListModel]) {
+    func getProducts() {
         
-        products.forEach { productsList?.append($0) }
-    }
-    // MARK: - Methods
-    
-    func fetchProducts(paginating: Bool) {
+        getCachedProducts()
         
-        if let products = cache.value(forKey: "products"),
-           !paginating {
-            print("hey it's cached")
-            self.productsList = products
-        }
-        if paginating {
-            isPaginating = true
-        }
         serviceManager?.getProducts { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let products):
-                if paginating {
-                    self.appendProduct(products: products)
-                    self.isPaginating = false
-                } else {
-                    self.productsList = products
-                    self.cache.insert(products, forKey: "products")
-                        print("cached")
-                }
-                self.delegate?.showProducts()
+                self.productsList = products
+                self.cache.insert(products, forKey: "products")
+                do { try self.cache.saveToDisk(withName: "products") }
+                catch { print("FailedTo cache") }
+                self.delegate?.reloadProductsListCollection()
             case .failure(let error):
                 self.delegate?.showError(msg: error.localizedDescription)
-                if paginating {
-                    self.isPaginating = false
-                }
             }
         }
+    }
+    
+    func getMoreProducts() {
+        guard !isFetching else { return }
+
+        isFetching = true
+        serviceManager?.getProducts { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(let products):
+                self.appendProduct(products: products)
+                self.delegate?.reloadProductsListCollection()
+                self.isFetching = false
+            case .failure(let error):
+                self.delegate?.showError(msg: error.localizedDescription)
+                self.isFetching = false
+            }
+        }
+    }
+    
+    func getCachedProducts() {
         
+        if let products = cache.value(forKey: "products") {
+            self.productsList = products
+        }
+    }
+    
+    private func appendProduct(products: [ProductsListModel]) {
+        
+        products.forEach { productsList?.append($0) }
     }
 }

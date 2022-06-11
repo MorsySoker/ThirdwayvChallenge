@@ -20,22 +20,3 @@ extension UIViewController {
         navigationController?.pushViewController(viewController, animated: true)
     }
 }
-
-extension UIViewController {
-    
-    func createSpinner() -> UIView {
-        
-        let containerView = UIView(frame: CGRect(x: 0,
-                                                 y: 0,
-                                                 width: view.frame.size.width,
-                                                 height: 100))
-        
-        let spinner = UIActivityIndicatorView()
-        spinner.center =  containerView.center
-        spinner.startAnimating()
-        
-        containerView.addSubview(spinner)
-        
-        return containerView
-    }
-}

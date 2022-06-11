@@ -13,7 +13,7 @@ final class ProductsListView: UIViewController {
     
     @IBOutlet private weak var productsListCollection: UICollectionView!
     
-    //MARK: Properties
+    //MARK: - Properties
     
     private var presenter: ProductsListPresenter?
     
@@ -70,6 +70,7 @@ final class ProductsListView: UIViewController {
         print("Reachable:", Network.reachability.isReachable)
         print("Wifi:", Network.reachability.isReachableViaWiFi)
     }
+    
     @objc func statusManager(_ notification: Notification) {
         updateUserInterface()
     }

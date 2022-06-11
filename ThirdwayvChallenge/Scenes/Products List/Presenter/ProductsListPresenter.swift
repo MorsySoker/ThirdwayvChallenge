@@ -77,6 +77,7 @@ final class ProductsListPresenter {
         if paginating {
             isPaginating = true
         }
+        
         serviceManager?.getProducts { [weak self] result in
             guard let self = self else { return }
             
@@ -103,6 +104,5 @@ final class ProductsListPresenter {
                 }
             }
         }
-        
     }
 }

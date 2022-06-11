@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Combine
-
 public protocol NetworkServiceProtocol {
     
     var requestTimeOut: Float { get }

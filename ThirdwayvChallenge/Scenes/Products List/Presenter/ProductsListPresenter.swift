@@ -23,7 +23,7 @@ final class ProductsListPresenter {
     // MARK: - Properties
     
     private var productsList: [ProductsListModel]?
-    private let cache = Cache<String, [ProductsListModel]>()
+    private let productRepository = ProductsRepository()
     private var serviceManager: ProductsListServiceProtocol?
     private var isFetching: Bool = false
     weak var delegate: ProductsListDelegate?
@@ -60,9 +60,7 @@ final class ProductsListPresenter {
             switch result {
             case .success(let products):
                 self.productsList = products
-                self.cache.insert(products, forKey: "products")
-                do { try self.cache.saveToDisk(withName: "products") }
-                catch { print("FailedTo cache") }
+                self.productRepository.save(products: products)
                 self.delegate?.reloadProductsListCollection()
             case .failure(let error):
                 self.delegate?.showError(msg: error.localizedDescription)
@@ -91,7 +89,7 @@ final class ProductsListPresenter {
     
     func getCachedProducts() {
         
-        if let products = cache.value(forKey: "products") {
+        if let products = productRepository.getProducts() {
             self.productsList = products
         }
     }

@@ -21,7 +21,7 @@ final class ProductsListView: UIViewController {
     // MARK: - init
     
     init(presenter: ProductsListPresenter) {
-
+        
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
@@ -49,7 +49,7 @@ final class ProductsListView: UIViewController {
         
         setReachabilityObserver()
         setupProductsListCollection()
-
+        
     }
     
     private func setReachabilityObserver() {
@@ -64,15 +64,17 @@ final class ProductsListView: UIViewController {
     private func updateUserInterface() {
         switch Network.reachability.status {
         case .unreachable:
-//            productsListCollection.isHidden = true
-//            noInternetConnectionImage.isHidden = false
-            print("no internet")
+            if let presenter = presenter {
+                presenter.getCachedProducts()
+            }
         case .wwan:
-            productsListCollection.isHidden = false
-            noInternetConnectionImage.isHidden = true
+            if let presenter = presenter {
+                presenter.getProducts()
+            }
         case .wifi:
-            productsListCollection.isHidden = false
-            noInternetConnectionImage.isHidden = true
+            if let presenter = presenter {
+                presenter.getProducts()
+            }
         }
         print("Reachability Summary")
         print("Status:", Network.reachability.status)

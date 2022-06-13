@@ -62,6 +62,11 @@ final class ProductsListView: UIViewController {
     }
     
     private func updateUserInterface() {
+        if Network.reachability.isReachable {
+            view.backgroundColor = .red
+        } else {
+            view.backgroundColor = .blue
+        }
         switch Network.reachability.status {
         case .unreachable:
             if let presenter = presenter {
@@ -119,7 +124,9 @@ extension ProductsListView: ProductsListPresenterViewDelegate {
     
     func reloadProductsListCollection() {
         DispatchQueue.main.async {
-            self.productsListCollection.reloadData()
+            UIView.performWithoutAnimation {
+                self.productsListCollection.reloadData()
+            }
         }
     }
     
@@ -185,7 +192,7 @@ extension ProductsListView: UIScrollViewDelegate {
         
         let position =  scrollView.contentOffset.y
         
-        if position > (productsListCollection.contentSize.height - 100 - scrollView.frame.size.height) {
+        if position > (productsListCollection.contentSize.height - 20 - scrollView.frame.size.height) {
             guard let presetner = presenter else { return }
             presetner.getMoreProducts()
         }

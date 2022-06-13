@@ -21,13 +21,13 @@
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Im0-OP-gVV">
                         <rect key="frame" x="10" y="10" width="232" height="128"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="128" id="ZWc-5e-AnH"/>
+                            <constraint firstAttribute="height" priority="999" constant="128" id="ZWc-5e-AnH"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D88-DV-UbC">
                         <rect key="frame" x="10" y="148" width="232" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="1Y7-da-xHT"/>
+                            <constraint firstAttribute="height" priority="999" constant="21" id="1Y7-da-xHT"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <color key="textColor" name="PriceColor"/>

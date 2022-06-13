@@ -26,6 +26,7 @@ final class ProductsListPresenter {
     private let productRepository = ProductsRepository()
     private var serviceManager: ProductsListServiceProtocol?
     private var isFetching: Bool = false
+    private var firstFetched: Bool = false
     weak var delegate: ProductsListDelegate?
     
     // MARK: - init
@@ -62,14 +63,16 @@ final class ProductsListPresenter {
                 self.productsList = products
                 self.productRepository.save(products: products)
                 self.delegate?.reloadProductsListCollection()
+                self.firstFetched = true
             case .failure(let error):
                 self.delegate?.showError(msg: error.localizedDescription)
+                self.firstFetched = true
             }
         }
     }
     
     func getMoreProducts() {
-        guard !isFetching else { return }
+        guard !isFetching, firstFetched else { return }
 
         isFetching = true
         serviceManager?.getProducts { [weak self] result in

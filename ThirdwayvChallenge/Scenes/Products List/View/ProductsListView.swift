@@ -35,11 +35,31 @@ final class ProductsListView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        let reachability = try! Reachability()
+
+        reachability.whenReachable = { reachability in
+            if reachability.connection == .wifi {
+                print("Reachable via WiFi")
+            } else {
+                print("Reachable via Cellular")
+            }
+        }
+        reachability.whenUnreachable = { _ in
+            print("Not reachable")
+        }
+
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print("Unable to start notifier")
+        }
+        
         guard let presenter = presenter else {
             return
         }
         presenter.delegate = self
         presenter.getProducts()
+        
     }
     
     override func viewDidLoad() {
@@ -49,7 +69,6 @@ final class ProductsListView: UIViewController {
         
         setReachabilityObserver()
         setupProductsListCollection()
-        
     }
     
     private func setReachabilityObserver() {

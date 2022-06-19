@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func reachable(with hostName: String) {
         do {
-            try Network.reachability = Reachability(hostname: hostName)
+            try Network.reachability = NetworkReachability(hostname: hostName)
         }
         catch {
             switch error as? Network.Error {

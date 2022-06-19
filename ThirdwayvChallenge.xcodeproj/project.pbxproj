@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1D291E1D285F8E350082FFCF /* CustomLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D291E1C285F8E350082FFCF /* CustomLayout.swift */; };
 		1D3216352857DAD800C8EAF5 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D3216342857DAD800C8EAF5 /* Reachability.swift */; };
 		1D343B5C285348E700414C81 /* ProductDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D343B5A285348E700414C81 /* ProductDetailsView.swift */; };
 		1D343B5D285348E700414C81 /* ProductDetailsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1D343B5B285348E700414C81 /* ProductDetailsView.xib */; };
 		1D343B5F28534E2D00414C81 /* UIViewController+Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D343B5E28534E2D00414C81 /* UIViewController+Navigation.swift */; };
-		1D343B6128539C0A00414C81 /* CustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D343B6028539C0A00414C81 /* CustomFlowLayout.swift */; };
 		1D343B642853FFCE00414C81 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D343B632853FFCD00414C81 /* Cache.swift */; };
 		1D544C772850F48C008249BA /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D544C762850F48C008249BA /* Base.swift */; };
 		1D544C792850F4C5008249BA /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D544C782850F4C5008249BA /* NetworkRequest.swift */; };
@@ -37,11 +37,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1D291E1C285F8E350082FFCF /* CustomLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLayout.swift; sourceTree = "<group>"; };
 		1D3216342857DAD800C8EAF5 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		1D343B5A285348E700414C81 /* ProductDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsView.swift; sourceTree = "<group>"; };
 		1D343B5B285348E700414C81 /* ProductDetailsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailsView.xib; sourceTree = "<group>"; };
 		1D343B5E28534E2D00414C81 /* UIViewController+Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Navigation.swift"; sourceTree = "<group>"; };
-		1D343B6028539C0A00414C81 /* CustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFlowLayout.swift; sourceTree = "<group>"; };
 		1D343B632853FFCD00414C81 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		1D544C762850F48C008249BA /* Base.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		1D544C782850F4C5008249BA /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
@@ -248,7 +248,7 @@
 		1DEE4588284FF3560041A074 /* Custom UI */ = {
 			isa = PBXGroup;
 			children = (
-				1D343B6028539C0A00414C81 /* CustomFlowLayout.swift */,
+				1D291E1C285F8E350082FFCF /* CustomLayout.swift */,
 			);
 			path = "Custom UI";
 			sourceTree = "<group>";
@@ -359,6 +359,7 @@
 				1D993277285539DB00B95EA2 /* ProductsRepository.swift in Sources */,
 				1D544C7D2850F5BF008249BA /* NetworkService.swift in Sources */,
 				1DEE4567284FE88F0041A074 /* AppDelegate.swift in Sources */,
+				1D291E1D285F8E350082FFCF /* CustomLayout.swift in Sources */,
 				1D343B642853FFCE00414C81 /* Cache.swift in Sources */,
 				1DC2D78B28526C5F00374E14 /* UIImageView+Extensions.swift in Sources */,
 				1DEE45922850024F0041A074 /* UICollectionView+Extensions.swift in Sources */,
@@ -367,7 +368,6 @@
 				1DC2D7862852522F00374E14 /* ProductsListService.swift in Sources */,
 				1D3216352857DAD800C8EAF5 /* Reachability.swift in Sources */,
 				1DEE4590284FF8EF0041A074 /* UIView+Extensions.swift in Sources */,
-				1D343B6128539C0A00414C81 /* CustomFlowLayout.swift in Sources */,
 				1DEE4586284FEE710041A074 /* ProductsListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

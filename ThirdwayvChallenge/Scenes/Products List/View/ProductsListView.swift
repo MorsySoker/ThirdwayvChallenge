@@ -36,7 +36,7 @@ final class ProductsListView: UIViewController {
         super.viewWillAppear(animated)
         
         let reachability = try! Reachability()
-
+        
         reachability.whenReachable = { reachability in
             if reachability.connection == .wifi {
                 print("Reachable via WiFi")
@@ -47,7 +47,7 @@ final class ProductsListView: UIViewController {
         reachability.whenUnreachable = { _ in
             print("Not reachable")
         }
-
+        
         do {
             try reachability.startNotifier()
         } catch {
@@ -115,25 +115,16 @@ final class ProductsListView: UIViewController {
     
     private func setupProductsListCollection() {
         
-        productsListCollection.collectionViewLayout = setcustomFlowLayout()
+        if let layout = productsListCollection?.collectionViewLayout as? CustomLayout {
+            layout.delegate = self
+        }
+        
         productsListCollection.contentInsetAdjustmentBehavior = .always
         productsListCollection.dataSource = self
         productsListCollection.delegate = self
         productsListCollection.register(cellType: ProductCell.self)
-        
+        productsListCollection.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         reloadProductsListCollection()
-    }
-    
-    private func setcustomFlowLayout() -> CustomFlowLayout {
-        
-        let customFlowLayout = CustomFlowLayout()
-        customFlowLayout.sectionInsetReference = .fromContentInset
-        customFlowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        customFlowLayout.minimumInteritemSpacing = 0
-        customFlowLayout.minimumLineSpacing = 0
-        customFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        
-        return customFlowLayout
     }
 }
 
@@ -202,6 +193,21 @@ extension ProductsListView: UICollectionViewDataSource {
         return productCell
     }
 }
+
+// MARK: - CustomLayout Delegate
+
+extension ProductsListView: CustomLayoutDelegate {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        heightForPhotoAtIndexPath indexPath:IndexPath) -> CGFloat {
+            guard let presenter = presenter,
+                  let product = presenter.getProductAtIndexPath(indexPath: indexPath.row) else {
+                return 0
+            }
+            return CGFloat(product.imageHeight)
+        }
+}
+
 
 // MARK: - ScrollView Delegate
 

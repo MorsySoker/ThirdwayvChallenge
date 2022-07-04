@@ -40,7 +40,7 @@ class CustomLayout: UICollectionViewLayout {
     override func prepare() {
         
       guard
-        //cache.isEmpty,
+        cache.isEmpty,
         let collectionView = collectionView
         else {
           return

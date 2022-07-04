@@ -35,80 +35,18 @@ final class ProductsListView: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        let reachability = try! Reachability()
-        
-        reachability.whenReachable = { reachability in
-            if reachability.connection == .wifi {
-                print("Reachable via WiFi")
-            } else {
-                print("Reachable via Cellular")
-            }
-        }
-        reachability.whenUnreachable = { _ in
-            print("Not reachable")
-        }
-        
-        do {
-            try reachability.startNotifier()
-        } catch {
-            print("Unable to start notifier")
-        }
-        
         guard let presenter = presenter else {
             return
         }
         presenter.delegate = self
         presenter.getProducts()
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Products List"
-        
-        setReachabilityObserver()
         setupProductsListCollection()
-    }
-    
-    private func setReachabilityObserver() {
-        NotificationCenter.default
-            .addObserver(self,
-                         selector: #selector(statusManager),
-                         name: .flagsChanged,
-                         object: nil)
-        updateUserInterface()
-    }
-    
-    private func updateUserInterface() {
-        if Network.reachability.isReachable {
-            view.backgroundColor = .red
-        } else {
-            view.backgroundColor = .blue
-        }
-        switch Network.reachability.status {
-        case .unreachable:
-            if let presenter = presenter {
-                presenter.getCachedProducts()
-            }
-        case .wwan:
-            if let presenter = presenter {
-                presenter.getProducts()
-            }
-        case .wifi:
-            if let presenter = presenter {
-                presenter.getProducts()
-            }
-        }
-        print("Reachability Summary")
-        print("Status:", Network.reachability.status)
-        print("HostName:", Network.reachability.hostname ?? "nil")
-        print("Reachable:", Network.reachability.isReachable)
-        print("Wifi:", Network.reachability.isReachableViaWiFi)
-    }
-    
-    @objc private func statusManager(_ notification: Notification) {
-        updateUserInterface()
     }
     
     // MARK: - Methods

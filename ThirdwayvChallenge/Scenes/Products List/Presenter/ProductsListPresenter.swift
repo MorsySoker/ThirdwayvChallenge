@@ -73,8 +73,8 @@ final class ProductsListPresenter {
     
     func getMoreProducts() {
         guard !isFetching, firstFetched else { return }
-
         isFetching = true
+        
         serviceManager?.getProducts { [weak self] result in
             guard let self = self else { return }
             

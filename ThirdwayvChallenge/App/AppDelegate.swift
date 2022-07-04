@@ -22,7 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setMainInterface() {
         
         let productsListVC =
-        ProductsListView(presenter: ProductsListPresenter(serviceManager: ProductsListService()))
+        ProductsListView(
+            presenter: ProductsListPresenter(
+                productsLoader: RemoteWithLocalFallBackFeedLoader(
+                    remoteLoader: ProductsListService(),
+                    localLoader: ProductsRepository())))
         let navigation = UINavigationController(rootViewController: productsListVC)
 
         let frame = UIScreen.main.bounds

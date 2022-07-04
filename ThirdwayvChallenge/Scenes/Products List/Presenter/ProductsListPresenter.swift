@@ -10,6 +10,10 @@ import UIKit
 
 // MARK: - Preseter Delegate
 
+public protocol ProductsLoader {
+    func getProducts(completion: @escaping (Result<[ProductsListModel], NetworkError>) -> Void)
+}
+
 typealias ProductsListDelegate = ProductsListPresenterViewDelegate & UIViewController
 
 protocol ProductsListPresenterViewDelegate: AnyObject {
@@ -23,16 +27,15 @@ final class ProductsListPresenter {
     // MARK: - Properties
     
     private var productsList: [ProductsListModel]?
-    private let productRepository = ProductsRepository()
-    private var serviceManager: ProductsListServiceProtocol?
+    private var productsLoader: ProductsLoader?
     private var isFetching: Bool = false
     private var firstFetched: Bool = false
     weak var delegate: ProductsListDelegate?
     
     // MARK: - init
     
-    init(serviceManager: ProductsListServiceProtocol) {
-        self.serviceManager = serviceManager
+    init(productsLoader: ProductsLoader) {
+        self.productsLoader = productsLoader
     }
     
     //MARK: - Methods
@@ -53,15 +56,12 @@ final class ProductsListPresenter {
 
     func getProducts() {
         
-        getCachedProducts()
-        
-        serviceManager?.getProducts { [weak self] result in
+        productsLoader?.getProducts { [weak self] result in
             guard let self = self else { return }
             
             switch result {
             case .success(let products):
                 self.productsList = products
-                self.productRepository.save(products: products)
                 self.delegate?.reloadProductsListCollection()
                 self.firstFetched = true
             case .failure(let error):
@@ -75,7 +75,7 @@ final class ProductsListPresenter {
         guard !isFetching, firstFetched else { return }
         isFetching = true
         
-        serviceManager?.getProducts { [weak self] result in
+        productsLoader?.getProducts { [weak self] result in
             guard let self = self else { return }
             
             switch result {
@@ -87,13 +87,6 @@ final class ProductsListPresenter {
                 self.delegate?.showError(msg: error.localizedDescription)
                 self.isFetching = false
             }
-        }
-    }
-    
-    func getCachedProducts() {
-        
-        if let products = productRepository.getProducts() {
-            self.productsList = products
         }
     }
     

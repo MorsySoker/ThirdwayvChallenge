@@ -24,6 +24,7 @@
 		1DC2D7892852564000374E14 /* ProductsListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC2D7882852564000374E14 /* ProductsListPresenter.swift */; };
 		1DC2D78B28526C5F00374E14 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC2D78A28526C5F00374E14 /* UIImageView+Extensions.swift */; };
 		1DC2D78D2852702000374E14 /* ProductCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC2D78C2852702000374E14 /* ProductCellViewModel.swift */; };
+		1DC439BB28734F3500557E9D /* RemoteWithLocalFallBackFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC439BA28734F3500557E9D /* RemoteWithLocalFallBackFeedLoader.swift */; };
 		1DEE4567284FE88F0041A074 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEE4566284FE88F0041A074 /* AppDelegate.swift */; };
 		1DEE4570284FE8920041A074 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DEE456F284FE8920041A074 /* Assets.xcassets */; };
 		1DEE4573284FE8920041A074 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DEE4571284FE8920041A074 /* LaunchScreen.storyboard */; };
@@ -53,6 +54,7 @@
 		1DC2D7882852564000374E14 /* ProductsListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsListPresenter.swift; sourceTree = "<group>"; };
 		1DC2D78A28526C5F00374E14 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		1DC2D78C2852702000374E14 /* ProductCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
+		1DC439BA28734F3500557E9D /* RemoteWithLocalFallBackFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteWithLocalFallBackFeedLoader.swift; sourceTree = "<group>"; };
 		1DEE4563284FE88F0041A074 /* ThirdwayvChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ThirdwayvChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DEE4566284FE88F0041A074 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1DEE456F284FE8920041A074 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 			children = (
 				1D343B622853FEF100414C81 /* Local */,
 				1D544C742850F44B008249BA /* Remote */,
+				1DC439BA28734F3500557E9D /* RemoteWithLocalFallBackFeedLoader.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				1D343B5F28534E2D00414C81 /* UIViewController+Navigation.swift in Sources */,
 				1D343B5C285348E700414C81 /* ProductDetailsView.swift in Sources */,
 				1DC2D782285250B900374E14 /* ProductListEndPoint.swift in Sources */,
+				1DC439BB28734F3500557E9D /* RemoteWithLocalFallBackFeedLoader.swift in Sources */,
 				1DC2D7842852518E00374E14 /* ProductsListModel.swift in Sources */,
 				1D993277285539DB00B95EA2 /* ProductsRepository.swift in Sources */,
 				1D544C7D2850F5BF008249BA /* NetworkService.swift in Sources */,

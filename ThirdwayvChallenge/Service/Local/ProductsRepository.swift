@@ -7,10 +7,9 @@
 
 import Foundation
 
-protocol ProductsRepositoryProtocol {
+protocol ProductsRepositoryProtocol: ProductsLoader {
     
     func save(products: [ProductsListModel])
-    func getProducts() -> [ProductsListModel]?
     func removeProducts()
 }
 
@@ -34,14 +33,15 @@ class ProductsRepository: ProductsRepositoryProtocol {
         catch { print("FailedTo cache") }
     }
     
-    func getProducts() -> [ProductsListModel]? {
+    func getProducts(completion: @escaping (Result<[ProductsListModel], NetworkError>) -> Void) {
         guard let products = cache.value(forKey: ProductsKey.products) else {
-            return nil
+            return
         }
-        return products
+        completion(.success(products))
     }
     
     func removeProducts() {
         cache.removeValue(forKey: ProductsKey.products)
     }
+    
 }
